@@ -15,7 +15,7 @@ function Base() {
   const generateOutputImage = async () => {
     // const outImg:FileWithPath
     // setOutputImageFile(outImg)
-    const outImg: File = await generateLogImage(uploadFiles, routeImageFiles[0])
+    const outImg: File = await generateLogImage(uploadFiles, routeImageFiles[0], new Date(), "北陸地方", 85, 60)
     setOutputImageFile(outImg)
     console.log("a")
   }
