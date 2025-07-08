@@ -6,16 +6,22 @@ import { FileWithPath } from '@mantine/dropzone'
 import { Button } from '@mantine/core'
 import Image from 'next/image'
 import { generateLogImage } from '../utils/generateLogImage'
+import MitinoekisForm from './MitinoekisForm'
 
 function Base() {
   const [uploadFiles, setUploadFiles] = useState<FileWithPath[]>([])
   const [routeImageFiles, setRouteImageFiles] = useState<FileWithPath[]>([])
   const [outputImageFile, setOutputImageFile] = useState<FileWithPath>()
+  const [area, setArea] = useState<string>("")
+  const [sumMitinoeki, setSumMitinoeki] = useState<number>(0)
+  const [visitedMitinoeki, setVisitedMitinoeki] = useState<number>(0)
+  const [logDate, setLogDate] = useState<Date>(new Date())
+
 
   const generateOutputImage = async () => {
     // const outImg:FileWithPath
     // setOutputImageFile(outImg)
-    const outImg: File = await generateLogImage(uploadFiles, routeImageFiles[0], new Date(), "北陸地方", 85, 60)
+    const outImg: File = await generateLogImage(uploadFiles, routeImageFiles[0], logDate, area, sumMitinoeki, visitedMitinoeki)
     setOutputImageFile(outImg)
     console.log("a")
   }
@@ -40,6 +46,18 @@ function Base() {
             idleMessage='ここにルートのスクショをドロップしてください（1枚）'
           />
         </div>
+      </div>
+      <div className='mx-auto w-fit'>
+        <MitinoekisForm
+          area = {area}
+          sumMitinoeki={sumMitinoeki}
+          visitedMitinoeki={visitedMitinoeki}
+          logDate={logDate}
+          setArea={setArea}
+          setSumMitinoeki={setSumMitinoeki}
+          setVisitedMitinoeki={setVisitedMitinoeki}
+          setLogDate={setLogDate}
+        />
       </div>
 
       <div className='mx-auto text-center my-2'>
